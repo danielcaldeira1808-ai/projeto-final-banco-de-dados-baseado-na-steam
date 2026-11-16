@@ -1,5 +1,5 @@
 -- testes_violacao.sql | cada comando abaixo VIOLA de proposito uma regra; o banco deve recusar todos.
--- Execute um por vez (com PRAGMA foreign_keys = ON) e registre a mensagem de erro.
+-- Execute um por vez.
 PRAGMA foreign_keys = ON;
 
 -- T01 [Integridade referencial / R1] jogo apontando para desenvolvedor inexistente
