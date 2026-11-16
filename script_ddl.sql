@@ -1,5 +1,5 @@
--- script_ddl.sql  |  Plataforma de jogos online
--- CIN 8003 - Bancos de Dados e Aplicacoes (UFSC)  |  SQLite
+-- script_ddl.sql  Plataforma de jogos online
+-- Bancos de Dados e Aplicacoes (UFSC)  
 -- Convencoes: dinheiro em centavos (INTEGER), datas em TEXT ISO 8601 (AAAA-MM-DD HH:MM:SS)
 -- Booleanos como INTEGER 0/1.
 
