@@ -4,7 +4,7 @@
 SELECT j.id_jogo,
        j.titulo,
        COUNT(c.id_compra)                                   AS unidades_vendidas,
-       COALESCE(SUM(i.preco_pago_centavos), 0) / 100.0      AS receita_reais,
+       COALESCE(SUM(CASE WHEN c.id_compra IS NOT NULL THEN i.preco_pago_centavos END), 0) / 100.0      AS receita_reais,
        CASE WHEN COUNT(c.id_compra) = 0 THEN 'sem vendas' ELSE 'com vendas' END AS situacao
 FROM jogo j
 LEFT JOIN item_compra i ON i.id_jogo = j.id_jogo
