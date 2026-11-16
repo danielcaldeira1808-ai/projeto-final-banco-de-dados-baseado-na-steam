@@ -1,8 +1,8 @@
---- Consulta 9 (TRANSACAO - altera o banco; rode em uma COPIA): ativar DLCs guardadas (R5).
---- Passo 1: ana_silva (id 1) recebe o jogo base 'Moonlit Tactics' (id 3); a DLC dela estava 'guardada'.
+--- Consulta 9 (TRANSACAO - altera o banco: ativar DLCs guardadas (R5).
+--- Passo 1: ana_silva (id 1) recebe o jogo base Moonlit Tactics (id 3); a DLC dela estava guardada.
 --- Passo 2: SAVEPOINT + UPDATE de ensaio, conferido e DESFEITO com ROLLBACK TO.
 --- Passo 3: o mesmo UPDATE e refeito e efetivado com COMMIT.
---- Tecnicas: BEGIN, SAVEPOINT, ROLLBACK TO, COMMIT, subconsulta EXISTS, IFNULL.
+--- BEGIN, SAVEPOINT, ROLLBACK TO, COMMIT, subconsulta EXISTS, IFNULL.
 BEGIN;
 
 INSERT INTO biblioteca (id_usuario, id_jogo, origem) VALUES (1, 3, 'compra');
