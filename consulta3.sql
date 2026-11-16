@@ -1,6 +1,6 @@
 --- Consulta 3: receita confirmada por mes e por metodo de pagamento.
 --- Mostra so combinacoes (mes, metodo) que somaram mais de R$ 20,00.
---- Tecnicas: INNER JOIN, SUM/MIN/MAX/COUNT, GROUP BY com 2 colunas, HAVING, ORDER BY ASC e DESC.
+--- INNER JOIN, SUM/MIN/MAX/COUNT, GROUP BY com 2 colunas, HAVING, ORDER BY ASC e DESC.
 SELECT strftime('%Y-%m', p.data_pagamento)  AS mes,
        p.metodo,
        COUNT(*)                             AS qtd_pagamentos,
