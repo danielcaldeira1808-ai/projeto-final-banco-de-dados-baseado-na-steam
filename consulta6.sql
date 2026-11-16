@@ -1,6 +1,6 @@
 --- Consulta 6: usuarios que possuem jogos dos generos 'Estrategia' ou 'Terror'.
 --- A lista de jogos desses generos vem de uma SUBCONSULTA com IN.
---- Tecnicas: subconsulta com IN (aninhada), INNER JOIN, ORDER BY ASC.
+--- subconsulta com IN (aninhada), INNER JOIN, ORDER BY ASC.
 SELECT u.nome_usuario,
        j.titulo,
        ROUND(b.minutos_jogados / 60.0, 1) AS horas_jogadas
