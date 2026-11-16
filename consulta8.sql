@@ -1,6 +1,6 @@
 --- Consulta 8: painel por jogador (gasto total e horas jogadas), inclusive quem nao comprou nada.
 --- Duas CTEs calculam os totais separadamente; COALESCE troca NULL por zero.
---- Tecnicas: CTE (WITH), LEFT JOIN, COALESCE, ORDER BY DESC.
+--- CTE (WITH), LEFT JOIN, COALESCE, ORDER BY DESC.
 WITH gasto AS (
     SELECT c.id_usuario, SUM(i.preco_pago_centavos) AS total_centavos
       FROM compra c
