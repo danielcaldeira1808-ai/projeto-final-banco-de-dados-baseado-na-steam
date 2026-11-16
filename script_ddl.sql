@@ -1,14 +1,13 @@
--- =====================================================================
--- script_ddl.sql  |  Plataforma de jogos online (modelo reduzido)
+-- script_ddl.sql  |  Plataforma de jogos online
 -- CIN 8003 - Bancos de Dados e Aplicacoes (UFSC)  |  SQLite
--- Convencoes: dinheiro em centavos (INTEGER), datas em TEXT ISO 8601
--- (AAAA-MM-DD HH:MM:SS), booleanos como INTEGER 0/1.
--- =====================================================================
+-- Convencoes: dinheiro em centavos (INTEGER), datas em TEXT ISO 8601 (AAAA-MM-DD HH:MM:SS)
+-- Booleanos como INTEGER 0/1.
+
 PRAGMA foreign_keys = ON;
 
--- ---------------------------------------------------------------------
--- NIVEL 1: tabelas-raiz (nao dependem de ninguem)
--- ---------------------------------------------------------------------
+
+-- tabelas-raiz 
+
 CREATE TABLE usuario (
     id_usuario      INTEGER PRIMARY KEY,
     nome_usuario    TEXT    NOT NULL UNIQUE,                 -- VARCHAR(40)
@@ -35,9 +34,9 @@ CREATE TABLE genero_tag (
     tipo          TEXT NOT NULL CHECK (tipo IN ('genero','tag'))   -- R2
 );
 
--- ---------------------------------------------------------------------
--- NIVEL 2: jogo e promocao
--- ---------------------------------------------------------------------
+
+-- jogo e promocao
+
 CREATE TABLE jogo (
     id_jogo                 INTEGER PRIMARY KEY,
     id_desenvolvedor        INTEGER NOT NULL
@@ -58,15 +57,15 @@ CREATE TABLE jogo (
 CREATE TABLE promocao (
     id_promocao  INTEGER PRIMARY KEY,
     nome         TEXT    NOT NULL,
-    desconto_pct INTEGER NOT NULL CHECK (desconto_pct BETWEEN 1 AND 100),  -- R9 (ate 100%)
+    desconto_pct INTEGER NOT NULL CHECK (desconto_pct BETWEEN 1 AND 100),  -- R9 (ate 100% de desconto)
     data_inicio  TEXT    NOT NULL,
     data_fim     TEXT    NOT NULL,
     CHECK (data_fim > data_inicio)                                         -- R9
 );
 
--- ---------------------------------------------------------------------
--- NIVEL 3: dependentes de jogo
--- ---------------------------------------------------------------------
+
+--dependentes de jogo
+
 CREATE TABLE jogo_genero_tag (                                -- N:N jogo x genero/tag
     id_jogo       INTEGER NOT NULL REFERENCES jogo(id_jogo)
                   ON DELETE CASCADE ON UPDATE CASCADE,
@@ -112,9 +111,8 @@ CREATE TABLE conquista (
     UNIQUE (id_conquista, id_jogo)        -- necessario para a FK composta de conquista_usuario
 );
 
--- ---------------------------------------------------------------------
--- NIVEL 4: biblioteca e comunidade
--- ---------------------------------------------------------------------
+ --biblioteca e comunidade
+
 CREATE TABLE biblioteca (
     id_biblioteca   INTEGER PRIMARY KEY,
     id_usuario      INTEGER NOT NULL REFERENCES usuario(id_usuario)
@@ -183,9 +181,9 @@ CREATE TABLE notificacao (                                    -- R17
     UNIQUE (id_usuario, id_versao)
 );
 
--- ---------------------------------------------------------------------
--- NIVEL 5: compras (historico financeiro: RESTRICT)
--- ---------------------------------------------------------------------
+
+--compras (historico financeiro: RESTRICT)
+
 CREATE TABLE compra (
     id_compra            INTEGER PRIMARY KEY,
     id_usuario           INTEGER NOT NULL REFERENCES usuario(id_usuario)
@@ -239,18 +237,17 @@ CREATE TABLE reembolso (
                    CHECK (status IN ('pendente','aprovado','negado'))
 );
 
--- ---------------------------------------------------------------------
 -- INDICES nas FKs mais consultadas
--- ---------------------------------------------------------------------
+
 CREATE INDEX ix_jogo_dev       ON jogo(id_desenvolvedor);
 CREATE INDEX ix_item_compra    ON item_compra(id_compra);
 CREATE INDEX ix_item_jogo      ON item_compra(id_jogo);
 CREATE INDEX ix_compra_usuario ON compra(id_usuario);
 CREATE INDEX ix_pagamento_comp ON pagamento(id_compra);
 
--- ---------------------------------------------------------------------
--- TRIGGERS (apenas 2: regras que CHECK/FK nao alcancam)
--- ---------------------------------------------------------------------
+
+-- TRIGGERS (apenas 2: regras que CHECK/FK nao alcancam, por causa do mesmo problema de envolver 2 tabelas)
+
 -- R4: a compra so e concluida apos a confirmacao do pagamento
 CREATE TRIGGER trg_r4_compra_so_com_pagamento
 BEFORE UPDATE OF status ON compra
