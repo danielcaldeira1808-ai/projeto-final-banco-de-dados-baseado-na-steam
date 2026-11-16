@@ -1,6 +1,6 @@
 --- Consulta 5: jogos aprovados e pagos com preco acima da media dos jogos pagos.
---- A media e calculada por uma SUBCONSULTA ESCALAR (devolve um unico valor).
---- Tecnicas: subconsulta escalar com AVG, ORDER BY DESC.
+--- A media e calculada para devolver um unico valor.
+--- subconsulta escalar com AVG, ORDER BY DESC.
 SELECT j.titulo,
        j.preco_centavos / 100.0 AS preco_reais,
        ROUND(j.preco_centavos / 100.0
