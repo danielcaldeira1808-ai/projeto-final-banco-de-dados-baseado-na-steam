@@ -1,6 +1,6 @@
 --- Consulta 1: faturamento, repasse e ticket medio por desenvolvedor.
 --- Considera apenas itens de JOGO de compras 'concluida'. Mostra so quem faturou algo.
---- Tecnicas: INNER JOIN com 4 tabelas, COUNT/SUM/AVG, GROUP BY com 2 colunas, HAVING, ORDER BY DESC.
+--- INNER JOIN com 4 tabelas, COUNT/SUM/AVG, GROUP BY com 2 colunas, HAVING, ORDER BY DESC.
 SELECT d.id_desenvolvedor,
        d.nome                                   AS desenvolvedor,
        COUNT(*)                                 AS itens_vendidos,
