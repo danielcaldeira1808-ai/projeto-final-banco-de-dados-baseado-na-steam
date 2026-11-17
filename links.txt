@@ -1,2 +1,3 @@
 Nenhuma URL externa é acessada durante a apresentação.
+caso os slides anexados nesse github não abram em sala vou ter que abrir o google drive durante a aula.
 
